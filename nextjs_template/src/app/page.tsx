@@ -2,6 +2,10 @@ import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import FeatureGrid from '@/components/FeatureGrid';
 import MediaGrid from '@/components/MediaGrid';
+import LogoMarquee from '@/components/LogoMarquee';
+import StatsSection from '@/components/StatsSection';
+import Pricing from '@/components/Pricing';
+import FAQ from '@/components/FAQ';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -75,6 +79,10 @@ export default function Home() {
       </section>
 
       <MediaGrid />
+
+      <Pricing />
+
+      <FAQ />
 
       {/* High-End Final CTA */}
       <section id="contact" className="py-32 md:py-48 bg-[#04060C] text-center px-4 relative overflow-hidden border-t border-white/5">

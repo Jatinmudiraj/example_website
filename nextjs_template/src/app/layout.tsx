@@ -25,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <body className="antialiased font-sans flex flex-col min-h-screen">
+        <div className="scroll-progress shadow-[0_0_10px_rgba(0,242,254,0.8)]"></div>
         {children}
       </body>
     </html>
