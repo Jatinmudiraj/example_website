@@ -1,111 +1,215 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans: var(--font-inter);
-  --font-heading: var(--font-playfair);
-
-  --color-primary: var(--primary);
-  --color-primary-hover: var(--primary-hover);
-  --color-secondary: var(--secondary);
-  --color-bg-main: var(--bg-main);
-  --color-bg-card: var(--bg-card);
-  --color-bg-accent: var(--bg-accent);
-  --color-text-main: var(--text-main);
-  --color-text-muted: var(--text-muted);
-  --color-text-light: var(--text-light);
-  --color-border-subtle: var(--border-color);
-}
-
-/* 
-  ==========================================
-  GLOBAL THEME VARIABLES
-  Change these to instantly re-theme the site
-  ========================================== 
-*/
 :root {
-  /* Brand Colors */
-  --primary: #4F46E5;
-  /* Indigo */
-  --primary-hover: #4338CA;
-  --secondary: #ec4899;
-  /* Pink */
+  --color-primary: #00f2fe;
+  --color-primary-hover: #4facfe;
+  --color-secondary: #9b51e0;
 
-  /* Backgrounds */
-  --bg-main: #f8fafc;
-  /* Light gray */
-  --bg-card: #ffffff;
-  --bg-accent: #e0e7ff;
-  /* Light indigo */
+  --color-bg-main: #060913;
+  --color-bg-card: rgba(14, 18, 28, 0.7);
+  --color-bg-accent: rgba(0, 242, 254, 0.05);
 
-  /* Typography */
-  --text-main: #0f172a;
-  /* Dark slate */
-  --text-muted: #64748b;
-  --text-light: #ffffff;
+  --color-text-main: #ffffff;
+  --color-text-muted: #94A3B8;
+  --color-text-light: #ffffff;
 
-  /* UI Elements */
-  --border-color: #e2e8f0;
+  --color-border-subtle: rgba(255, 255, 255, 0.05);
 }
 
-@layer base {
-  body {
-    background-color: var(--bg-main);
-    color: var(--text-main);
-    @apply antialiased scroll-smooth;
-  }
+body {
+  background-color: var(--color-bg-main);
+  color: var(--color-text-main);
+  background-image:
+    radial-gradient(ellipse at top left, rgba(79, 172, 254, 0.1), transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(155, 81, 224, 0.1), transparent 50%);
+  background-attachment: fixed;
 }
 
-@layer components {
+::selection {
+  background-color: rgba(0, 242, 254, 0.2);
+  color: var(--color-primary);
+}
 
-  /* Button Constants */
-  .btn {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300;
-  }
+.glass-card {
+  background-color: var(--color-bg-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 500ms ease-in-out;
+}
 
-  .btn-primary {
-    @apply bg-primary text-text-light hover:bg-primary-hover hover:-translate-y-1 hover:shadow-lg;
-  }
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: inherit;
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0)) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 10;
+}
 
-  .btn-outline {
-    @apply border-2 border-primary text-primary hover:bg-primary hover:text-text-light;
-  }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  transition: all 300ms;
+  position: relative;
+  overflow: hidden;
+}
 
-  /* Card Constants */
-  .glass-card {
-    background-color: color-mix(in srgb, var(--bg-card) 85%, transparent);
-    @apply backdrop-blur-md border border-border-subtle rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300;
-  }
+.btn-primary {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-hover));
+  color: #000;
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
+}
 
-  /* Typography Scale */
+.btn-primary:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: 0 0 30px rgba(0, 242, 254, 0.6);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-primary);
+}
+
+.btn-outline::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 1px solid var(--color-primary);
+  transition: all 300ms;
+  pointer-events: none;
+}
+
+.btn-outline:hover::before {
+  border-width: 20px;
+  opacity: 0;
+}
+
+.btn-outline:hover {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-hover));
+  color: #000;
+}
+
+.h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(to right, #ffffff, #dbeafe, var(--color-primary));
+  margin-bottom: 1.5rem;
+  line-height: 1.25;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
   .h1 {
-    @apply font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-text-main mb-6 leading-tight;
-  }
-
-  .h2 {
-    @apply font-heading text-3xl md:text-4xl font-bold text-text-main mb-4;
-  }
-
-  .h3 {
-    @apply font-heading text-xl md:text-2xl font-semibold text-text-main mb-3;
-  }
-
-  .subtitle {
-    @apply text-lg md:text-xl text-text-muted mb-8 max-w-2xl;
-  }
-
-  /* Layout Constants */
-  .section-padding {
-    @apply py-16 md:py-24;
+    font-size: 3.75rem;
   }
 }
 
-/* Utility Animations */
+@media (min-width: 1024px) {
+  .h1 {
+    font-size: 5rem;
+  }
+}
+
+.h2 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .h2 {
+    font-size: 3rem;
+  }
+}
+
+.h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+  margin-bottom: 2rem;
+  max-width: 42rem;
+  font-weight: 300;
+  line-height: 1.625;
+}
+
+@media (min-width: 768px) {
+  .subtitle {
+    font-size: 1.25rem;
+  }
+}
+
+.section-padding {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+}
+
+.animate-float {
+  animation: float 10s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float 15s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-30px) scale(1.05);
+  }
+}
+
 .fade-in-up {
-  @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+  opacity: 0;
+  transform: translateY(2rem);
+  transition: all 1000ms ease-out;
 }
 
 .fade-in-up.visible {
-  @apply opacity-100 translate-y-0;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .delay-100 {
